@@ -5,6 +5,26 @@ import './App.css';
 
 function App() {
   const [isCompleted, setIsCompleted] = useState(false);
+  const [allTodos, setAllTodos] = useState([]);
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
+
+  const handleAdd = () => {
+    if(newTitle === '' || newDescription === ''){
+      alert('Please fill in all fields');
+      return;
+    }
+    const newTodo = {
+      id: allTodos.length + 1,
+      title: newTitle,
+      description: newDescription,
+      isCompleted: false
+    }
+    setAllTodos([...allTodos, newTodo]);
+    setNewTitle('');
+    setNewDescription('');
+  }
+
   return (
     <div className="App">
     <h1> My Todos</h1>
@@ -13,14 +33,14 @@ function App() {
       <div className = "todo-input">
         <div className = "input-item">
         <label> Title</label>
-        <input type="text" placeholder = "What's on the agenda" />
+        <input type="text" value={newTitle} onChange={(e)=>setNewTitle(e.target.value)} placeholder = "What's on the agenda" />
       </div>
       <div className = "input-item">
         <label> Description</label>
-        <input type="text" placeholder = "What do you want to achieve" />
+        <input type="text" value={newDescription} onChange={(e)=>setNewDescription(e.target.value)} placeholder = "What do you want to achieve" />
       </div>
       <div className = "input-item">
-        <button type='button' className="button"> Add </button>
+        <button type='button' onClick={handleAdd} className="button"> Add </button>
       </div>
       </div>
 
@@ -30,17 +50,20 @@ function App() {
       </div>
 
       <div className="todo-list">
-        <div className="todo-list-item">
+        {allTodos.map((todo, index) => {
+          return(
+        <div className="todo-list-item" key={index}>
           <div>
-            <h3>Task 1</h3>
-            <p>Description</p>
+            <h3>{todo.title}</h3>
+            <p>{todo.description}</p>
           </div>
+          
           <div>
           <MdDeleteOutline className='icon'/>
           <TiTickOutline className='check-icon'/>
           </div>
-          
         </div>
+          )})}
       </div>
     </div>
     </div>
