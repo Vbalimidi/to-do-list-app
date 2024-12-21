@@ -8,6 +8,7 @@ function App() {
   const [allTodos, setAllTodos] = useState([]);
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
+  const [CompletedTodos, setCompletedTodos] = useState([]);
 
   const handleAdd = () => {
     if (newTitle === "" && newDescription === "") {
@@ -28,6 +29,28 @@ function App() {
   const handleDelete = (index) => {
     const newTodos = allTodos.filter((todo, i) => i !== index);
     setAllTodos(newTodos);
+  };
+
+  const handleComplete = (index) => {
+    let now = new Date();
+    let dd = now.getDate();
+    let mm = now.getMonth() + 1;
+    let yyyy = now.getFullYear();
+    let hr = now.getHours();
+    let min = now.getMinutes();
+    let sec = now.getSeconds();
+    let CompletedOn =
+      dd + "-" + mm + "-" + yyyy + " at " + hr + ":" + min + ":" + sec;
+
+    let filteredItem = {
+      ...allTodos[index],
+      CompletedOn: CompletedOn,
+    };
+
+    let updatedCompletedTodos = [...CompletedTodos];
+    updatedCompletedTodos.push(filteredItem);
+    setCompletedTodos(updatedCompletedTodos);
+    handleDelete(index);
   };
 
   return (
@@ -82,25 +105,51 @@ function App() {
         </div>
 
         <div className="todo-list">
-          {allTodos.map((todo, index) => {
-            return (
-              <div className="todo-list-item" key={index}>
-                <div>
-                  <h3>{todo.title}</h3>
-                  <p>{todo.description}</p>
-                </div>
+          {isCompleted === false &&
+            allTodos.map((todo, index) => {
+              return (
+                <div className="todo-list-item" key={index}>
+                  <div>
+                    <h3>{todo.title}</h3>
+                    <p>{todo.description}</p>
+                  </div>
 
-                <div>
-                  <MdDeleteOutline
-                    className="icon"
-                    onClick={() => handleDelete(index)}
-                    title="Delete?"
-                  />
-                  <TiTickOutline className="check-icon" />
+                  <div>
+                    <MdDeleteOutline
+                      className="icon"
+                      onClick={() => handleDelete(index)}
+                      title="Delete?"
+                    />
+                    <TiTickOutline
+                      className="check-icon"
+                      onClick={() => handleComplete(index)}
+                      title="Complete?"
+                    />
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+
+          {isCompleted === true &&
+            CompletedTodos.map((todo, index) => {
+              return (
+                <div className="todo-list-item" key={index}>
+                  <div>
+                    <h3>{todo.title}</h3>
+                    <p>{todo.description}</p>
+                    <p>Completed on: {todo.CompletedOn}</p>
+                  </div>
+
+                  <div>
+                    <MdDeleteOutline
+                      className="icon"
+                      onClick={() => handleDelete(index)}
+                      title="Delete?"
+                    />
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>
