@@ -32,8 +32,8 @@ function App() {
   };
 
   const handleDeleteCompleted = (index) => {
-    const newTodos = CompletedTodos.filter((todo, i) => i !== index);
-    setCompletedTodos(newTodos);
+    const newCompletedTodos = CompletedTodos.filter((todo, i) => i !== index);
+    setCompletedTodos(newCompletedTodos);
   };
 
   const handleComplete = (index) => {
