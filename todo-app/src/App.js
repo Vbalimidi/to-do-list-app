@@ -1,4 +1,6 @@
 import React, {useState} from 'react'; 
+import { MdDeleteOutline } from "react-icons/md";
+import { TiTickOutline } from "react-icons/ti";
 import './App.css';
 
 function App() {
@@ -28,9 +30,16 @@ function App() {
       </div>
 
       <div className="todo-list">
-        <div className="todo-lit-item">
-          <h3>Task 1</h3>
-          <p>Description</p>
+        <div className="todo-list-item">
+          <div>
+            <h3>Task 1</h3>
+            <p>Description</p>
+          </div>
+          <div>
+          <MdDeleteOutline className='icon'/>
+          <TiTickOutline className='check-icon'/>
+          </div>
+          
         </div>
       </div>
     </div>

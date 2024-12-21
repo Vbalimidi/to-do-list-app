@@ -70,6 +70,56 @@ h1{
   cursor: pointer;
 }
 
+.todo-buttons{
+  margin-bottom: 10px;
+}
+
 .active{
   background-color: #301d30;
 }
+
+.todo-list{
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-list-item{
+  background-color: #e4d2e4;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.todo-list-item h3{
+  font-size: 25px;
+  margin: 5px;
+}
+
+.todo-list-item p{
+  font-size: 15px;
+  margin-top: 0px;
+  margin: 5px;
+}
+
+.icon{
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.check-icon{
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.check-icon:hover{
+  color: #5e3b5e;
+}
+
+.icon:hover{
+  color: red;
+}
+
