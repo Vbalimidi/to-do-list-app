@@ -31,6 +31,11 @@ function App() {
     setAllTodos(newTodos);
   };
 
+  const handleDeleteCompleted = (index) => {
+    const newTodos = CompletedTodos.filter((todo, i) => i !== index);
+    setCompletedTodos(newTodos);
+  };
+
   const handleComplete = (index) => {
     let now = new Date();
     let dd = now.getDate();
@@ -143,7 +148,7 @@ function App() {
                   <div>
                     <MdDeleteOutline
                       className="icon"
-                      onClick={() => handleDelete(index)}
+                      onClick={() => handleDeleteCompleted(index)}
                       title="Delete?"
                     />
                   </div>
